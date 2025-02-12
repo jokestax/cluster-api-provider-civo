@@ -18,6 +18,7 @@ package controller
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"os"
 
@@ -65,7 +66,7 @@ func (r *CivoClusterReconciler) Reconcile(ctx context.Context, req ctrl.Request)
 
 	clusterInfo, err := client.FindKubernetesCluster(civoCluster.Name)
 	if err != nil {
-		if err.Error() == fmt.Sprintf("ZeroMatchesError: unable to find %s, zero matches", civoCluster.Name) {
+		if errors.Is(err, civogo.ZeroMatchesError) {
 			log.FromContext(ctx).Info("Cluster not found in Civo, proceeding with creation")
 		} else {
 			return ctrl.Result{}, fmt.Errorf("failed to get cluster info: %w", err)
