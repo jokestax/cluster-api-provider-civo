@@ -1,0 +1,4 @@
+## Append samples of your project ##
+resources:
+- infrastructure.cluster.x-k8s.io_v1alpha1_civocluster.yaml
+# +kubebuilder:scaffold:manifestskustomizesamples
