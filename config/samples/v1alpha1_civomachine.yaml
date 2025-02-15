@@ -1,0 +1,9 @@
+apiVersion: my.domain/v1alpha1
+kind: CivoMachine
+metadata:
+  labels:
+    app.kubernetes.io/name: capi-civo
+    app.kubernetes.io/managed-by: kustomize
+  name: civomachine-sample
+spec:
+  # TODO(user): Add fields here
