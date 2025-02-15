@@ -39,10 +39,21 @@ make run
 Create a Kubernetes cluster in Civo by applying a sample CR:
 
 ```
-kubectl apply -f config/samples/infrastructure.cluster.x-k8s.io_v1alpha1_civocluster.yaml
+kubectl apply -f config/samples/CivoCluster.yaml
 ```
 6. Delete the sample CivoCluster resource
 
 ```
-kubectl delete -f config/samples/infrastructure.cluster.x-k8s.io_v1alpha1_civocluster.yaml
+kubectl delete -f config/samples/CivoCluster.yaml
+```
+6. Apply a sample CivoMachine resource
+Create a Kubernetes cluster in Civo by applying a sample CR:
+
+```
+kubectl apply -f config/samples/CivoMachine.yaml
+```
+.7 Delete the sample CivoMachine resource
+
+```
+kubectl delete -f config/samples/CivoMachine.yaml
 ```
