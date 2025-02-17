@@ -161,7 +161,7 @@ undeploy: kustomize ## Undeploy controller from the K8s cluster specified in ~/.
 
 
 ##@ Releasing
-RELEASE_DIR ?= out 
+RELEASE_DIR ?= out
 
 $(RELEASE_DIR):
 	mkdir -p $(RELEASE_DIR)/
@@ -180,7 +180,7 @@ release-templates: $(RELEASE_DIR)
 
 .PHONY: release-manifests
 release-manifests: $(KUSTOMIZE) $(RELEASE_DIR)
-	cp metadata.yaml $(RELEASE_DIR)/
+	cp ./metadata.yaml $(RELEASE_DIR)/
 	kustomize build config/default > $(RELEASE_DIR)/infrastructure-components.yaml
 
 

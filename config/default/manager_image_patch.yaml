@@ -8,4 +8,4 @@ spec:
     spec:
       containers:
         - name: manager
-          image: jokesta/capi-civo:latest
+          image: jokesta/capi-civo:v0.0.0-rc1
