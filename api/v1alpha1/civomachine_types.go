@@ -29,19 +29,13 @@ type CivoMachineSpec struct {
 	// Important: Run "make" to regenerate code after modifying this file
 
 	// Foo is an example field of CivoMachine. Edit civomachine_types.go to remove/update
-	Name         string `json:"name"`
-	Count        int    `json:"count"`
-	InstanceType string `json:"instance_type"`
-	Region       string `json:"region"`
+	Foo string `json:"foo,omitempty"`
 }
 
 // CivoMachineStatus defines the observed state of CivoMachine.
 type CivoMachineStatus struct {
-	Ready bool `json:"ready"`
-
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
-
 }
 
 // +kubebuilder:object:root=true

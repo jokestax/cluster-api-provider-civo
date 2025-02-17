@@ -1,9 +1,0 @@
-apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
-kind: CivoMachine
-metadata:
-  name: machine-2
-spec:
-   region: LON1
-   instance_type: g4s.xsmall
-   count: 1
-   name: machine-1

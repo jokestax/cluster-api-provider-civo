@@ -18,14 +18,8 @@ package controller
 
 import (
 	"context"
-	"errors"
-	"fmt"
-	"os"
-
-	"github.com/civo/civogo"
 	infra "github.com/jokestax/cluster-api-provider-civo/api/v1alpha1"
 
-	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/runtime"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
@@ -52,86 +46,9 @@ type CivoMachineReconciler struct {
 // For more details, check Reconcile and its Result here:
 // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.20.0/pkg/reconcile
 func (r *CivoMachineReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
-	l := log.FromContext(ctx)
+	_ = log.FromContext(ctx)
 
-	civoMachine := infra.CivoMachine{}
-	err := r.Get(ctx, req.NamespacedName, &civoMachine)
-	if err != nil {
-		if apierrors.IsNotFound(err) {
-			return ctrl.Result{}, nil
-		}
-		l.Error(err, "Failed to fetch CivoCluster")
-		return ctrl.Result{}, err
-	}
-
-	apiKey := os.Getenv("CIVO_API_KEY")
-
-	client, err := civogo.NewClient(apiKey, civoMachine.Spec.Region)
-	if err != nil {
-		return ctrl.Result{}, fmt.Errorf("failed to create Civo client: %w", err)
-	}
-
-	instanceInfo, err := client.FindInstance(civoMachine.Spec.Name)
-	if err != nil {
-		if !errors.Is(err, civogo.ZeroMatchesError) {
-			return ctrl.Result{}, err
-		}
-		log.FromContext(ctx).Info("Machine not found in Civo, proceeding with creation")
-	}
-
-	if civoMachine.ObjectMeta.DeletionTimestamp.IsZero() {
-		if !containsString(civoMachine.ObjectMeta.Finalizers, "infrastructure.cluster.x-k8s.io/finalizer") {
-			civoMachine.ObjectMeta.Finalizers = append(civoMachine.ObjectMeta.Finalizers, "infrastructure.cluster.x-k8s.io/finalizer")
-			if err := r.Client.Update(ctx, &civoMachine); err != nil {
-				return ctrl.Result{}, err
-			}
-		}
-	} else {
-		if containsString(civoMachine.ObjectMeta.Finalizers, "infrastructure.cluster.x-k8s.io/finalizer") {
-			_, err := client.DeleteInstance(instanceInfo.ID)
-			if err != nil {
-				return ctrl.Result{}, err
-			}
-
-			civoMachine.ObjectMeta.Finalizers = removeString(civoMachine.ObjectMeta.Finalizers, "infrastructure.cluster.x-k8s.io/finalizer")
-			if err := r.Update(ctx, &civoMachine); err != nil {
-				l.Error(err, "Failed to remove finalizer")
-				return ctrl.Result{}, err
-			}
-
-		}
-		l.Info("Machine Deleted", "machine name", civoMachine.Spec.Name)
-		return ctrl.Result{}, nil
-	}
-
-	if civoMachine.Status.Ready {
-		l.Info("machine already provisioned", "machine_name", civoMachine.Spec.Name)
-		return ctrl.Result{}, nil
-	}
-
-	instanceConfig := civogo.InstanceConfig{
-		Hostname: civoMachine.Spec.Name,
-		Count:    civoMachine.Spec.Count,
-		Region:   civoMachine.Spec.Region,
-		Size:     civoMachine.Spec.InstanceType,
-	}
-
-	instance, err := client.CreateInstance(&instanceConfig)
-	if err != nil {
-		if errors.Is(err, civogo.DatabaseInstanceDuplicateNameError) {
-			l.Info("cluster with same name already present", "host name", civoMachine.Spec.Name)
-			return ctrl.Result{}, nil
-		}
-		return ctrl.Result{}, err
-	}
-
-	l.Info("Provisioned Instance", "instance name", instance.Hostname)
-
-	civoMachine.Status.Ready = true
-	err = r.Status().Update(ctx, &civoMachine)
-	if err != nil {
-		return ctrl.Result{}, err
-	}
+	// TODO(user): your logic here
 
 	return ctrl.Result{}, nil
 }

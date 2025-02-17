@@ -1,7 +1,5 @@
-REGISTRY ?= jokesta
-IMAGE_NAME ?= capi-civo
-CONTROLLER_IMAGE ?= $(REGISTRY):$(IMAGE_NAME)
-TAG                 ?= v0.0.0-rc1
+# Image URL to use all building/pushing image targets
+IMG ?= controller:latest
 
 # Get the currently used golang install path (in GOPATH/bin, unless GOBIN is set)
 ifeq (,$(shell go env GOBIN))
@@ -158,26 +156,6 @@ deploy: manifests kustomize ## Deploy controller to the K8s cluster specified in
 .PHONY: undeploy
 undeploy: kustomize ## Undeploy controller from the K8s cluster specified in ~/.kube/config. Call with ignore-not-found=true to ignore resource not found errors during deletion.
 	$(KUSTOMIZE) build config/default | $(KUBECTL) delete --ignore-not-found=$(ignore-not-found) -f -
-
-
-##@ Releasing
-RELEASE_DIR ?= out 
-
-.PHONY: release 
-release: kustomize clean-release set-manifest-image release-manifests release-templates clean-release-git 
-
-.PHONY: set-manifest-image
-set-manifest-image: 
-	sed -i '' -e 's@image: .*@image: '"$(REGISTRY)/$(IMAGE_NAME):$(TAG)"'@' ./config/default/manager_image_patch.yaml
-
-.PHONY: release-templates
-release-templates: $(RELEASE_DIR)	
-		cp templates/cluster-template* $(RELEASE_DIR)/
-
-.PHONY: release-manifests
-release-manifests: $(KUSTOMIZE) $(RELEASE_DIR)
-	cp metadata.yaml $(RELEASE_DIR)/metadata.yaml
-	kustomize build config/default > $(RELEASE_DIR)/infrastructure-components.yaml
 
 ##@ Dependencies
 
