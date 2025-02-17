@@ -1,6 +1,6 @@
 REGISTRY ?= jokesta
 IMAGE_NAME ?= capi-civo
-CONTROLLER_IMAGE ?= $(REGISTRY):$(IMAGE_NAME)
+CONTROLLER_IMAGE ?= $(REGISTRY)/$(IMAGE_NAME)
 TAG                 ?= v0.0.0-rc1
 
 # Get the currently used golang install path (in GOPATH/bin, unless GOBIN is set)
