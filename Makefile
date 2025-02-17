@@ -180,7 +180,7 @@ release-templates: $(RELEASE_DIR)
 
 .PHONY: release-manifests
 release-manifests: $(KUSTOMIZE) $(RELEASE_DIR)
-	cp metadata.yaml $(RELEASE_DIR)/metadata.yaml
+	cp metadata.yaml $(RELEASE_DIR)/
 	kustomize build config/default > $(RELEASE_DIR)/infrastructure-components.yaml
 
 
