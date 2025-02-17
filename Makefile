@@ -163,6 +163,9 @@ undeploy: kustomize ## Undeploy controller from the K8s cluster specified in ~/.
 ##@ Releasing
 RELEASE_DIR ?= out 
 
+$(RELEASE_DIR):
+	mkdir -p $(RELEASE_DIR)/
+
 .PHONY: release 
 release: kustomize clean-release set-manifest-image release-manifests release-templates clean-release-git 
 
@@ -179,6 +182,18 @@ release-manifests: $(KUSTOMIZE) $(RELEASE_DIR)
 	cp metadata.yaml $(RELEASE_DIR)/metadata.yaml
 	kustomize build config/default > $(RELEASE_DIR)/infrastructure-components.yaml
 
+
+##@ Cleanup
+
+.PHONY: clean-release-git
+clean-release-git:  ## Restores the git files usually modified during a release
+	git restore config/default/*manager_image_patch.yaml
+
+.PHONY: clean-release
+clean-release: clean-release-git  ## Clean release artifacts and temporary files
+	rm -rf $(RELEASE_DIR)
+	rm -rf dist
+	
 ##@ Dependencies
 
 ## Location to install dependencies to
