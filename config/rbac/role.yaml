@@ -30,3 +30,29 @@ rules:
   - get
   - patch
   - update
+- apiGroups:
+  - my.domain
+  resources:
+  - civomachines
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - my.domain
+  resources:
+  - civomachines/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - my.domain
+  resources:
+  - civomachines/status
+  verbs:
+  - get
+  - patch
+  - update
