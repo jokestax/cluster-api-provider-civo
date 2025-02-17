@@ -167,7 +167,7 @@ $(RELEASE_DIR):
 	mkdir -p $(RELEASE_DIR)/
 
 .PHONY: release 
-release: kustomize set-manifest-image release-manifests release-templates clean-release-git 
+release: kustomize set-manifest-image release-manifests clean-release-git 
 
 .PHONY: set-manifest-image
 set-manifest-image: 
