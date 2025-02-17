@@ -171,6 +171,7 @@ release: kustomize set-manifest-image release-manifests release-templates clean-
 
 .PHONY: set-manifest-image
 set-manifest-image: 
+	ls -la
 	sed -i '' -e 's@image: .*@image: '"$(REGISTRY)/$(IMAGE_NAME):$(TAG)"'@' $(GITHUB_WORKSPACE)/config/default/manager_image_patch.yaml
 
 .PHONY: release-templates
