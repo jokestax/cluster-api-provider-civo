@@ -1,4 +1,8 @@
 on:
+  push:
+    branches:
+      - main
+      
   workflow_dispatch: 
 
 permissions:
@@ -47,7 +51,7 @@ jobs:
 
       - name: List contents of workspace (debug)
         run: ls -la $GITHUB_WORKSPACE
-        
+
       - name: Create Release Artifacts
         run: make release
         env:
