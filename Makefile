@@ -176,7 +176,7 @@ set-manifest-image:
 
 .PHONY: release-templates
 release-templates: $(RELEASE_DIR)	
-		cp templates/cluster-template* $(RELEASE_DIR)/
+		cp ./templates/cluster-template* $(RELEASE_DIR)/
 
 .PHONY: release-manifests
 release-manifests: $(KUSTOMIZE) $(RELEASE_DIR)
