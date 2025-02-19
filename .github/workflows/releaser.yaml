@@ -61,7 +61,7 @@ jobs:
         with:
           files: |
             ./out/*
-          tag_name: ${{ needs.create-tag.outputs.new_tag }}
+          tag_name: "v0.0.0"
           
       - name: Clear
         if: always()
