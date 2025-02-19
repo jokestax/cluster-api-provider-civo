@@ -19,7 +19,7 @@ package controller
 import (
 	"context"
 
-	infrastructureclusterxk8siov1alpha1 "github.com/jokestax/cluster-api-provider-civo/api/v1alpha1"
+	infrastructureclusterxk8siov1beta1 "github.com/jokestax/cluster-api-provider-civo/api/v1beta1"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	"k8s.io/apimachinery/pkg/api/errors"
@@ -39,13 +39,13 @@ var _ = Describe("CivoCluster Controller", func() {
 			Name:      resourceName,
 			Namespace: "default", // TODO(user):Modify as needed
 		}
-		civocluster := &infrastructureclusterxk8siov1alpha1.CivoCluster{}
+		civocluster := &infrastructureclusterxk8siov1beta1.CivoCluster{}
 
 		BeforeEach(func() {
 			By("creating the custom resource for the Kind CivoCluster")
 			err := k8sClient.Get(ctx, typeNamespacedName, civocluster)
 			if err != nil && errors.IsNotFound(err) {
-				resource := &infrastructureclusterxk8siov1alpha1.CivoCluster{
+				resource := &infrastructureclusterxk8siov1beta1.CivoCluster{
 					ObjectMeta: metav1.ObjectMeta{
 						Name:      resourceName,
 						Namespace: "default",
@@ -58,7 +58,7 @@ var _ = Describe("CivoCluster Controller", func() {
 
 		AfterEach(func() {
 			// TODO(user): Cleanup logic after each test, like removing the resource instance.
-			resource := &infrastructureclusterxk8siov1alpha1.CivoCluster{}
+			resource := &infrastructureclusterxk8siov1beta1.CivoCluster{}
 			err := k8sClient.Get(ctx, typeNamespacedName, resource)
 			Expect(err).NotTo(HaveOccurred())
 

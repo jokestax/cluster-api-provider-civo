@@ -1,4 +1,4 @@
-apiVersion: my.domain/v1alpha1
+apiVersion: my.domain/v1beta1
 kind: CivoMachine
 metadata:
   labels:

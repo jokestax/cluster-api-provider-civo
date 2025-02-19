@@ -27,7 +27,7 @@ import (
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	infra "github.com/jokestax/cluster-api-provider-civo/api/v1alpha1"
+	infra "github.com/jokestax/cluster-api-provider-civo/api/v1beta1"
 )
 
 var _ = Describe("CivoMachine Controller", func() {

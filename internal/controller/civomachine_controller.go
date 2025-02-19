@@ -23,7 +23,7 @@ import (
 	"os"
 
 	"github.com/civo/civogo"
-	infra "github.com/jokestax/cluster-api-provider-civo/api/v1alpha1"
+	infra "github.com/jokestax/cluster-api-provider-civo/api/v1beta1"
 
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/runtime"
