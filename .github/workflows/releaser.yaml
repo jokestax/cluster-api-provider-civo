@@ -24,7 +24,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
           DEFAULT_BUMP: 'none'
-          INITIAL_VERSION: 0.0.0
+          INITIAL_VERSION: v0.0.0
   create-release:
     runs-on: ubuntu-24.04
     needs: [create-tag]
