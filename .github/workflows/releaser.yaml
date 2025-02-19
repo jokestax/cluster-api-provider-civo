@@ -46,8 +46,6 @@ jobs:
         run: |
           make docker-build
           make docker-push
-        env:
-          TAG: ${{ needs.create-tag.outputs.new_tag }}
 
       - name: List contents of workspace (debug)
         run: ls -la $GITHUB_WORKSPACE
