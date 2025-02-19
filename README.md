@@ -57,3 +57,20 @@ kubectl apply -f config/samples/CivoMachine.yaml
 ```
 kubectl delete -f config/samples/CivoMachine.yaml
 ```
+
+Using clusterctl 
+
+1. Create a clusterctl.yaml file with contents as below 
+
+```
+providers:
+  - name: "civo"
+    url: "https://github.com/jokestax/cluster-api-provider-civo/releases/latest/infrastructure-components.yaml"
+    type: "InfrastructureProvider"
+```
+
+2. Run clusterctl init cmd 
+
+```
+clusterctl init --infrastructure civo --config=<PATH_TO_ABOVE_CLUSTERCTL_YAML>
+```
