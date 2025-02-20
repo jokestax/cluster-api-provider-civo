@@ -8,6 +8,7 @@ rules:
   - infrastructure.cluster.x-k8s.io
   resources:
   - civoclusters
+  - civomachines
   verbs:
   - create
   - delete
@@ -20,37 +21,13 @@ rules:
   - infrastructure.cluster.x-k8s.io
   resources:
   - civoclusters/finalizers
+  - civomachines/finalizers
   verbs:
   - update
 - apiGroups:
   - infrastructure.cluster.x-k8s.io
   resources:
   - civoclusters/status
-  verbs:
-  - get
-  - patch
-  - update
-- apiGroups:
-  - my.domain
-  resources:
-  - civomachines
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - my.domain
-  resources:
-  - civomachines/finalizers
-  verbs:
-  - update
-- apiGroups:
-  - my.domain
-  resources:
   - civomachines/status
   verbs:
   - get

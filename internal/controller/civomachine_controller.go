@@ -38,9 +38,9 @@ type CivoMachineReconciler struct {
 	Scheme *runtime.Scheme
 }
 
-// +kubebuilder:rbac:groups=my.domain,resources=civomachines,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=my.domain,resources=civomachines/status,verbs=get;update;patch
-// +kubebuilder:rbac:groups=my.domain,resources=civomachines/finalizers,verbs=update
+// +kubebuilder:rbac:groups=infrastructure.cluster.x-k8s.io,resources=civomachines,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=infrastructure.cluster.x-k8s.io,resources=civomachines/status,verbs=get;update;patch
+// +kubebuilder:rbac:groups=infrastructure.cluster.x-k8s.io,resources=civomachines/finalizers,verbs=update
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.

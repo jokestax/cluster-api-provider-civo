@@ -1,4 +1,4 @@
-apiVersion: my.domain/v1beta1
+apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
 kind: CivoMachine
 metadata:
   labels:
