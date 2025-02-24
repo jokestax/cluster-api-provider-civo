@@ -46,13 +46,13 @@ kubectl apply -f config/samples/CivoCluster.yaml
 ```
 kubectl delete -f config/samples/CivoCluster.yaml
 ```
-6. Apply a sample CivoMachine resource
+7. Apply a sample CivoMachine resource
 Create a Kubernetes cluster in Civo by applying a sample CR:
 
 ```
 kubectl apply -f config/samples/CivoMachine.yaml
 ```
-.7 Delete the sample CivoMachine resource
+8. Delete the sample CivoMachine resource
 
 ```
 kubectl delete -f config/samples/CivoMachine.yaml
