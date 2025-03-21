@@ -26,12 +26,10 @@ import (
 
 // CivoClusterSpec defines the desired state of CivoCluster.
 type CivoClusterSpec struct {
-	Region            string   `json:"region"`
-	KubernetesVersion string   `json:"kubernetesVersion"`
-	CIDRBlock         string   `json:"cidrBlock,omitempty"`
-	NetworkID         string   `json:"networkID,omitempty"`
-	MachineType       string   `json:"machineType,omitempty"`
-	Addons            []string `json:"addons,omitempty"`
+	Region            string `json:"region"`
+	ClusterType       string `json:"clusterType"`
+	NodeCount         int    `json:"nodeCount"`
+	KubernetesVersion string `json:"kubernetesVersion,omitempty"`
 }
 
 // CivoClusterStatus defines the observed state of CivoCluster.

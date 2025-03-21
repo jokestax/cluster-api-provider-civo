@@ -39,35 +39,17 @@ spec:
           spec:
             description: CivoClusterSpec defines the desired state of CivoCluster.
             properties:
-              addons:
-                items:
-                  type: string
-                type: array
-              cidrBlock:
+              clusterType:
                 type: string
-              controlPlaneEndpoint:
-                type: string
-              defaultMachineType:
-                type: string
-              firewallRules:
-                items:
-                  type: string
-                type: array
               kubernetesVersion:
                 type: string
-              networkID:
-                type: string
-              numControlPlaneNodes:
-                type: integer
-              numWorkerNodes:
+              nodeCount:
                 type: integer
               region:
                 type: string
             required:
-            - defaultMachineType
-            - kubernetesVersion
-            - numControlPlaneNodes
-            - numWorkerNodes
+            - clusterType
+            - nodeCount
             - region
             type: object
           status:

@@ -61,8 +61,12 @@ func (r *CivoClusterReconciler) Reconcile(ctx context.Context, req ctrl.Request)
 
 	clusterConfig := civogo.KubernetesClusterConfig{
 		Name:            civoCluster.Name,
-		NumTargetNodes:  civoCluster.Spec.NumWorkerNodes,
-		TargetNodesSize: civoCluster.Spec.DefaultMachineType,
+		NumTargetNodes:  civoCluster.Spec.NodeCount,
+		TargetNodesSize: civoCluster.Spec.ClusterType,
+	}
+
+	if len(civoCluster.Spec.KubernetesVersion) != 0 {
+		clusterConfig.KubernetesVersion = civoCluster.Spec.KubernetesVersion
 	}
 
 	clusterInfo, err := client.FindKubernetesCluster(civoCluster.Name)
@@ -114,8 +118,7 @@ func (r *CivoClusterReconciler) Reconcile(ctx context.Context, req ctrl.Request)
 
 	civoCluster.Status.Ready = true
 	civoCluster.Status.ControlPlaneEndpoint = cluster.APIEndPoint
-	civoCluster.Status.NodeCount = civoCluster.Spec.NumWorkerNodes
-	// TODO(user): your logic here
+	civoCluster.Status.NodeCount = civoCluster.Spec.NodeCount
 
 	if err := r.Status().Update(ctx, &civoCluster); err != nil {
 		l.Error(err, "Failed to update cluster status")

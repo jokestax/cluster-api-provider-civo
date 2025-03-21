@@ -1,13 +1,12 @@
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
 kind: CivoCluster
 metadata:
-  name: capi-cluster
+  name: capi-cluster-1
   namespace: default
 spec:
   region: "LON1"
-  kubernetesVersion: "1.27"
-  numControlPlaneNodes: 1
-  numWorkerNodes: 1
-  defaultMachineType: "g4s.kube.small"
+  kubernetesVersion: "1.29.8-k3s1"
+  nodeCount: 2
+  clusterType: "g4s.kube.small"
 
 
